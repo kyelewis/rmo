@@ -1,6 +1,6 @@
-#include "hello_socket.h"
+#include "http_client.h"
 
-void hello_socket() {
+void http_client(char* domain) {
 
   printf("\n--- INTERNET SOCKET ---\n");
 
@@ -13,7 +13,7 @@ void hello_socket() {
 
   // DNS Lookup
   struct addrinfo *result;
-  int s = getaddrinfo("google.com", "80", &hints, &result);
+  int s = getaddrinfo(domain, "80", &hints, &result);
   assert(s==0);
 
   struct addrinfo *rp;
@@ -35,7 +35,8 @@ void hello_socket() {
 
   printf("Connected\n");
 
-  char hello[] = "GET / HTTP/1.1\nHost: google.com\n\n";
+  char hello[1024];
+  sprintf(hello, "GET / HTTP/1.1\nHost: %s\n\n", domain);
   int res = write(fd, hello, sizeof(hello));
   assert(res=sizeof(hello));
 

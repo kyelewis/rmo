@@ -1,1 +1,1 @@
-mkdir build && cd build && cmake --build --clean-first .. && make
+rm -rf build && mkdir -p build && cd build && cmake .. && make

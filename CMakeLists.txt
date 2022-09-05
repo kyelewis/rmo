@@ -4,4 +4,4 @@ set(RMO_SRC "${PROJECT_SOURCE_DIR}/src")
 
 include_directories(RMO_SRC)
 
-add_executable(rmo ${RMO_SRC}/main.c ${RMO_SRC}/hello_socket.c)
+add_executable(rmo ${RMO_SRC}/main.c ${RMO_SRC}/http_client.c)

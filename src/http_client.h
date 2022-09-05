@@ -1,5 +1,5 @@
-#ifndef HELLO_SOCKET_H
-#define HELLO_SOCKET_H
+#ifndef HTTP_CLIENT_H 
+#define HTTP_CLIENT_H 
 
 #include <stdio.h>       // printf
 #include <assert.h>      // assert
@@ -10,6 +10,6 @@
 #include <netdb.h>
 #include <stdlib.h>
 
-void hello_socket();
+void http_client();
 
 #endif
