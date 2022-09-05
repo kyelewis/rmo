@@ -11,6 +11,6 @@
 #include <netdb.h>
 #include <stdlib.h>
 
-void http_client();
+void http_client(char* host);
 
 #endif  // SRC_HTTP_CLIENT_H_

@@ -1,9 +1,8 @@
 // Copyright 2022 Kye Lewis <kye@kyedoesdev.com>
 #include "http_client.h"
+#include "http_request/http_request.h"
 
-void http_client(char* domain) {
-  printf("\n--- INTERNET SOCKET ---\n");
-
+void http_client(char* host) {
   struct addrinfo hints = {
     .ai_family = AF_INET,  // IPV4 only
     .ai_socktype = SOCK_STREAM,
@@ -13,7 +12,7 @@ void http_client(char* domain) {
 
   // DNS Lookup
   struct addrinfo *result;
-  int s = getaddrinfo(domain, "80", &hints, &result);
+  int s = getaddrinfo(host, "80", &hints, &result);
   assert(s == 0);
 
   struct addrinfo *rp;
@@ -34,12 +33,17 @@ void http_client(char* domain) {
 
   printf("Connected\n");
 
-  char hello[1024];
-  snprintf(hello, sizeof(hello), "GET / HTTP/1.1\nHost: %s\n\n", domain);
-  int res = write(fd, hello, sizeof(hello));
-  assert(res = sizeof(hello));
+  char http_request[1024];
+  struct HttpRequestHeaders headers = {
+    .host = host,
+    .userAgent = "rmo/0.0.1"
+  };
+  make_http_request(http_request, sizeof(http_request), "/index.html", headers);
 
-  printf("---\n%s\n", hello);
+  int res = write(fd, http_request, sizeof(http_request));
+  assert(res = sizeof(http_request));
+
+  printf("---\n%s\n", http_request);
 
   char* buffer = malloc(1024);
   char* ptr = buffer;

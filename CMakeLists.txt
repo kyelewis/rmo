@@ -3,6 +3,6 @@ project(rmo)
 set(RMO_SRC "${PROJECT_SOURCE_DIR}/src")
 set(CMAKE_C_CPPLINT "cpplint")
 
-include_directories(RMO_SRC)
+include_directories(RMO_SRC "${RMO_SRC}/http_request")
 
-add_executable(rmo ${RMO_SRC}/main.c ${RMO_SRC}/http_client.c)
+add_executable(rmo ${RMO_SRC}/main.c ${RMO_SRC}/http_client.c ${RMO_SRC}/http_request/http_request.c)
