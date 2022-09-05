@@ -7,7 +7,7 @@
     pkgs = nixpkgs.legacyPackages.x86_64-linux;
     in with pkgs; {
       devShells.x86_64-linux.default = mkShell {
-        buildInputs = [ cmake ];
+        buildInputs = [ cmake cpplint ]; 
       };
     };
 }

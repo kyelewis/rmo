@@ -1,7 +1,7 @@
-#include "http_client.h"
+// Copyright 2022 Kye Lewis <kye@kyedoesdev.com>
+#include <http_client.h>
 
 void http_client(char* domain) {
-
   printf("\n--- INTERNET SOCKET ---\n");
 
   struct addrinfo hints = {
@@ -14,31 +14,30 @@ void http_client(char* domain) {
   // DNS Lookup
   struct addrinfo *result;
   int s = getaddrinfo(domain, "80", &hints, &result);
-  assert(s==0);
+  assert(s == 0);
 
   struct addrinfo *rp;
   int fd;
-  for(rp = result; rp != NULL; rp = rp->ai_next) {
-
+  for (rp = result; rp != NULL; rp = rp->ai_next) {
     // Create Socket
     printf("Creating socket\n");
     fd = socket(rp->ai_family, rp->ai_socktype, 0);
-    if(fd == -1) continue;    // could not open socket
- 
+    if (fd == -1) continue;    // could not open socket
+
     printf("Trying to connect\n");
-    if(connect(fd, rp->ai_addr, rp->ai_addrlen) != -1) break;
+    if (connect(fd, rp->ai_addr, rp->ai_addrlen) != -1) break;
 
     close(fd);
   }
 
-  assert(rp!=NULL);
+  assert(rp != NULL);
 
   printf("Connected\n");
 
   char hello[1024];
-  sprintf(hello, "GET / HTTP/1.1\nHost: %s\n\n", domain);
+  snprintf(hello, "GET / HTTP/1.1\nHost: %s\n\n", domain);
   int res = write(fd, hello, sizeof(hello));
-  assert(res=sizeof(hello));
+  assert(res = sizeof(hello));
 
   printf("---\n%s\n", hello);
 
@@ -49,10 +48,9 @@ void http_client(char* domain) {
   do {
     len = read(fd, ptr, sizeof(buffer));
     ptr += len;
-  } while(len > 0);
+  } while (len > 0);
 
   printf("---\n%s", buffer);
 
   close(fd);
-
 }

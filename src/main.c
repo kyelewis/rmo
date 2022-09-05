@@ -1,10 +1,10 @@
+// Copyright 2022 Kye Lewis <kye@kyedoesdev.com>
 #include <stdlib.h>
 
-#include "http_client.h"
+#include "./http_client.h"
 
 int main(int argc, char* argv[]) {
-
-  if(argc != 2) {
+  if (argc != 2) {
     printf("Usage: %s <domain>", argv[0]);
     exit(EXIT_FAILURE);
   }
