@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 project(rmo)
 set(RMO_SRC "${PROJECT_SOURCE_DIR}/src")
+set(CMAKE_C_CPPLINT "cpplint")
 
 include_directories(RMO_SRC)
 

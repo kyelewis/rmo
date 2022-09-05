@@ -1,5 +1,5 @@
 // Copyright 2022 Kye Lewis <kye@kyedoesdev.com>
-#include <http_client.h>
+#include "http_client.h"
 
 void http_client(char* domain) {
   printf("\n--- INTERNET SOCKET ---\n");
@@ -35,7 +35,7 @@ void http_client(char* domain) {
   printf("Connected\n");
 
   char hello[1024];
-  snprintf(hello, "GET / HTTP/1.1\nHost: %s\n\n", domain);
+  snprintf(hello, sizeof(hello), "GET / HTTP/1.1\nHost: %s\n\n", domain);
   int res = write(fd, hello, sizeof(hello));
   assert(res = sizeof(hello));
 
